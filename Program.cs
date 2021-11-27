@@ -146,7 +146,11 @@ namespace ConsoleApp4
 
             //}
             //Console.WriteLine(res);
+            #region leetcode easy
+            //Leetcode_Easy leetCodeEasy = new Leetcode_Easy();
+            //Console.WriteLine(leetCodeEasy.IsPalindrome(345545));
 
+            #endregion
             #region Dynamic Programming
             //Console.WriteLine(Dynamic_Programming.CoinChange(new int[] { 1, 2, 5 }, 11));
 
@@ -162,19 +166,19 @@ namespace ConsoleApp4
             //tree.BuildTree(new int[] { 3, 9, 20, 15, 7 }, new int[] { 9, 3, 15, 20, 7 });
 
             //------------------------
-            var root = new TreeNode(1);
-            root.left = new TreeNode(3);
-            root.left.left = new TreeNode(5);
+            //var root = new TreeNode(1);
+            //root.left = new TreeNode(3);
+            //root.left.left = new TreeNode(5);
             //root.left.right = new TreeNode(4);
-            root.right = new TreeNode(2);
+            //root.right = new TreeNode(2);
             //root.right.right = new TreeNode(7);
            //--------------------merge binary tree-------------- 
             
-            var root2 = new TreeNode(2);
-            root2.left = new TreeNode(1);
-            root2.right = new TreeNode(3);
-            root2.left.right = new TreeNode(4);
-            root2.right.right = new TreeNode(7);
+            //var root2 = new TreeNode(2);
+            //root2.left = new TreeNode(1);
+            //root2.right = new TreeNode(3);
+            //root2.left.right = new TreeNode(4);
+            //root2.right.right = new TreeNode(7);
 
             //var rett = tree.MergeTrees(root,root2);
             //tree.InOrderPrint(rett);
@@ -182,13 +186,17 @@ namespace ConsoleApp4
 
             //--------------------merge binary tree--------------
             //---------------invert binary tree----------------
-            var invertedTree = tree.InvertBTree(root);
-            tree.InOrderPrint(invertedTree);
-           //---------------invert binary tree-----------------
+            //var invertedTree = tree.InvertBTree(root);
+            //tree.InOrderPrint(invertedTree);
+            //---------------invert binary tree-----------------
+            //--------------preorder an Nary tree-------------
+            Node naryRoot = new Node(1);
+            naryRoot.children = new List<Node>() { new Node(3, new List<Node>() { new Node(5), new Node(6) }), new Node(2), new Node(4) };
 
+            //var preOrderNary= tree.PreorderNary(naryRoot, new List<int>());
+            var preOrderNary2= tree.PreorderNaryIterative(naryRoot, new List<int>());
 
-
-
+            preOrderNary2.All(x => { Console.WriteLine(x); return true; });
 
             //Console.WriteLine(tree.kthSmallest(root,5));
 

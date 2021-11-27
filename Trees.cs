@@ -16,6 +16,27 @@ namespace ConsoleApp4
             this.right = right;
         }
     }
+
+    //N ary tree
+    // Definition for a Node.
+    public class Node
+    {
+        public int val;
+        public IList<Node> children;
+
+        public Node() { }
+
+        public Node(int _val)
+        {
+            val = _val;
+        }
+
+        public Node(int _val, IList<Node> _children)
+        {
+            val = _val;
+            children = _children;
+        }
+    }
     class Trees
     {
         /*Given the root of a binary tree, return the zigzag level order traversal of its nodes' values. (i.e., from left to right, then right to left for the next level and alternate between).*/
@@ -199,6 +220,52 @@ namespace ConsoleApp4
             if(root.right!=null)InvertBTree(root.right);
 
             return root;
+        }
+
+        //N-ary Tree Preorder Traversal
+        //https://leetcode.com/problems/n-ary-tree-preorder-traversal/
+        public IList<int> PreorderNary(Node root, List<int> result)
+        {
+            if (root != null)
+            {
+                result.Add(root.val);
+                for(int i = 0; i < root.children.Count; i++)
+                {
+                    if (root.children[i].children != null)
+                    {
+                        PreorderNary(root.children[i],result);
+                    }
+                    else
+                    {
+                        result.Add(root.children[i].val);
+                    }
+                    
+                }
+            }
+
+            return result;
+
+        }
+        public IList<int> PreorderNaryIterative(Node root, List<int> result)
+        {
+            Stack<Node> stack = new Stack<Node>();
+            stack.Push(root);
+            while (stack.Count > 0)
+            {
+                var node = stack.Pop();
+                result.Add(node.val);
+                if (node.children != null)
+                {
+                    for(int i = node.children.Count-1;i>=0;i--)
+                    {
+                        stack.Push(node.children[i]);
+                    }
+                }
+
+            }
+
+            return result;
+
         }
 
     }
