@@ -190,5 +190,16 @@ namespace ConsoleApp4
 
         }
 
+        public TreeNode InvertBTree(TreeNode root)
+        {
+            var temp = root.right;
+            root.right = root.left;
+            root.left = temp;
+            if(root.left!=null)InvertBTree(root.left);
+            if(root.right!=null)InvertBTree(root.right);
+
+            return root;
+        }
+
     }
 }

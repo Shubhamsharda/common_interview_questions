@@ -168,7 +168,7 @@ namespace ConsoleApp4
             //root.left.right = new TreeNode(4);
             root.right = new TreeNode(2);
             //root.right.right = new TreeNode(7);
-            
+           //--------------------merge binary tree-------------- 
             
             var root2 = new TreeNode(2);
             root2.left = new TreeNode(1);
@@ -176,8 +176,17 @@ namespace ConsoleApp4
             root2.left.right = new TreeNode(4);
             root2.right.right = new TreeNode(7);
 
-            var rett = tree.MergeTrees(root,root2);
-            tree.InOrderPrint(rett);
+            //var rett = tree.MergeTrees(root,root2);
+            //tree.InOrderPrint(rett);
+
+
+            //--------------------merge binary tree--------------
+            //---------------invert binary tree----------------
+            var invertedTree = tree.InvertBTree(root);
+            tree.InOrderPrint(invertedTree);
+           //---------------invert binary tree-----------------
+
+
 
 
 
