@@ -134,18 +134,18 @@ namespace ConsoleApp4
             //var res = Leetcode_Medium.canJump(nums);
             //var res = Leetcode_Medium.permute(new int[] { 1, 2, 3 });
             //var res = Leetcode_Medium.PermuteUnique(new int[] { 1, 1, 2 });
-            var res = Leetcode_Medium.Partition("aab");
-            foreach (var lst in res)
-            {
-                Console.WriteLine("-----------");
-                foreach(var ele in lst)
-                {
-                    Console.WriteLine(ele);
-                }
-                Console.WriteLine("-----------");
+            //var res = Leetcode_Medium.Partition("aab");
+            //foreach (var lst in res)
+            //{
+            //    Console.WriteLine("-----------");
+            //    foreach(var ele in lst)
+            //    {
+            //        Console.WriteLine(ele);
+            //    }
+            //    Console.WriteLine("-----------");
 
-            }
-            Console.WriteLine(res);
+            //}
+            //Console.WriteLine(res);
 
             #region Dynamic Programming
             //Console.WriteLine(Dynamic_Programming.CoinChange(new int[] { 1, 2, 5 }, 11));
@@ -162,20 +162,35 @@ namespace ConsoleApp4
             //tree.BuildTree(new int[] { 3, 9, 20, 15, 7 }, new int[] { 9, 3, 15, 20, 7 });
 
             //------------------------
-            //var root = new TreeNode(5);
-            //root.left = new TreeNode(3);
-            //root.left.left = new TreeNode(2);
+            var root = new TreeNode(1);
+            root.left = new TreeNode(3);
+            root.left.left = new TreeNode(5);
             //root.left.right = new TreeNode(4);
-            //root.right= new TreeNode(6);
-            //root.right.right= new TreeNode(7);
+            root.right = new TreeNode(2);
+            //root.right.right = new TreeNode(7);
+            
+            
+            var root2 = new TreeNode(2);
+            root2.left = new TreeNode(1);
+            root2.right = new TreeNode(3);
+            root2.left.right = new TreeNode(4);
+            root2.right.right = new TreeNode(7);
+
+            var rett = tree.MergeTrees(root,root2);
+            tree.InOrderPrint(rett);
+
+
 
             //Console.WriteLine(tree.kthSmallest(root,5));
-            
+
 
             #endregion
-
-            Console.ReadLine();
-            var dict = new Dictionary<char, int>();
+            Console.WriteLine("Run again?press any key");
+            var response = Console.ReadLine();
+            if (response != null)
+            {
+                Main(null);
+            }
         }
 
          
