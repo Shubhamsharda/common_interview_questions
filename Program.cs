@@ -146,6 +146,13 @@ namespace ConsoleApp4
 
             //}
             //Console.WriteLine(res);
+            LRUCache lruProblem = new LRUCache(3);
+            lruProblem.Put(1,1);
+            lruProblem.Put(2,4);
+            lruProblem.Put(3,9);
+            lruProblem.Put(4,16);
+            Console.WriteLine(lruProblem.Get(1));
+
             #region leetcode easy
             //Leetcode_Easy leetCodeEasy = new Leetcode_Easy();
             //Console.WriteLine(leetCodeEasy.IsPalindrome(345545));
@@ -190,13 +197,13 @@ namespace ConsoleApp4
             //tree.InOrderPrint(invertedTree);
             //---------------invert binary tree-----------------
             //--------------preorder an Nary tree-------------
-            Node naryRoot = new Node(1);
-            naryRoot.children = new List<Node>() { new Node(3, new List<Node>() { new Node(5), new Node(6) }), new Node(2), new Node(4) };
+            //Node naryRoot = new Node(1);
+            //naryRoot.children = new List<Node>() { new Node(3, new List<Node>() { new Node(5), new Node(6) }), new Node(2), new Node(4) };
 
             //var preOrderNary= tree.PreorderNary(naryRoot, new List<int>());
-            var preOrderNary2= tree.PreorderNaryIterative(naryRoot, new List<int>());
+            //var preOrderNary2= tree.PreorderNaryIterative(naryRoot, new List<int>());
 
-            preOrderNary2.All(x => { Console.WriteLine(x); return true; });
+            //preOrderNary2.All(x => { Console.WriteLine(x); return true; });
 
             //Console.WriteLine(tree.kthSmallest(root,5));
 

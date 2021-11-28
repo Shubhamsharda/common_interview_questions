@@ -794,6 +794,87 @@ Output: [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]02*/
         }
     }
 
+    public class LRUCache
+    {
+        LLNode head = new LLNode();
+        LLNode tail = new LLNode();
+        Dictionary<int, LLNode> dict;
+        int capacity;
+
+        public LRUCache(int capacity)
+        {
+            dict = new Dictionary<int, LLNode>();
+            head.next = tail;
+            tail.prev = head;
+            this.capacity = capacity;
+        }
+        
+        public int Get(int key)
+        {
+            int result = -1;
+            LLNode node = dict.GetValueOrDefault(key);
+            if (node != null)
+            {
+                delete(node);
+                add(node);
+                result = node.val;
+            }
+            return result;
+        }
+
+        public void Put(int key, int value)
+        {
+            LLNode node = dict.GetValueOrDefault(key);
+            if (node != null)
+            {
+                delete(node);
+                node.val = value;
+                add(node);
+            }
+            else
+            {
+                if(dict.Count == capacity)
+                {
+                    dict.Remove(tail.prev.key);
+                    delete(tail.prev);
+                }
+
+                LLNode new_node = new LLNode();
+                new_node.key = key;
+                new_node.val = value;
+
+                dict[key] = new_node;
+                add(new_node);
+            }
+        }
+
+        public void add(LLNode node)
+        {
+            var nextNode = head.next;
+            head.next = node;
+            node.prev = head;
+            node.next = nextNode;
+            nextNode.prev = node;
+        }
+        public void delete(LLNode node)
+        {
+            var nextNode = node.next;
+            var prevNode = node.prev;
+            nextNode.prev = prevNode;
+            prevNode.next   = nextNode;
+        }
+
+    }
+
+    public class LLNode
+    {
+        public int key { get; set; }
+        public int val { get; set; }
+
+        public LLNode next { get; set; }
+        public LLNode prev { get; set; }
+    }
+
 
 
 
