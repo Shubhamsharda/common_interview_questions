@@ -146,16 +146,23 @@ namespace ConsoleApp4
 
             //}
             //Console.WriteLine(res);
-            LRUCache lruProblem = new LRUCache(3);
-            lruProblem.Put(1,1);
-            lruProblem.Put(2,4);
-            lruProblem.Put(3,9);
-            lruProblem.Put(4,16);
-            Console.WriteLine(lruProblem.Get(1));
+            //LRUCache lruProblem = new LRUCache(3);
+            //lruProblem.Put(1,1);
+            //lruProblem.Put(2,4);
+            //lruProblem.Put(3,9);
+            //lruProblem.Put(4,16);
+            //Console.WriteLine(lruProblem.Get(1));
 
             #region leetcode easy
-            //Leetcode_Easy leetCodeEasy = new Leetcode_Easy();
+            Leetcode_Easy leetCodeEasy = new Leetcode_Easy();
             //Console.WriteLine(leetCodeEasy.IsPalindrome(345545));
+
+            Console.WriteLine(leetCodeEasy.IsValid("[[[]"));
+            Console.WriteLine(leetCodeEasy.IsValid("(){}"));
+            Console.WriteLine(leetCodeEasy.IsValid("([)]"));
+            Console.WriteLine(leetCodeEasy.IsValid("(]"));
+            Console.WriteLine(leetCodeEasy.IsValid("()[]{}"));
+            Console.WriteLine(leetCodeEasy.IsValid("()"));
 
             #endregion
             #region Dynamic Programming
