@@ -261,11 +261,8 @@ namespace ConsoleApp4
                         stack.Push(node.children[i]);
                     }
                 }
-
             }
-
             return result;
-
         }
 
     }

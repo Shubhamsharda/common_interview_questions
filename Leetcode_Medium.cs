@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.Http.Headers;
@@ -792,6 +793,113 @@ Output: [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]02*/
             }
             return true;
         }
+        /*Word Search
+         Given an m x n grid of characters board and a string word, return true if word exists in the grid.
+
+         The word can be constructed from letters of sequentially adjacent cells, where adjacent cells are
+         horizontally or vertically neighboring. The same letter cell may not be used more than once.
+
+            Input: board = [["A","B","C","E"]
+                            ,["S","F","C","S"],
+                            ["A","D","E","E"]], word = "ABCCED"
+            Output: true
+             */
+        public static bool Exist(char[][] board, string word)
+        {
+            var chars = word.ToCharArray();
+            var startIndexes = new List<Point>();
+            for(int i = 0; i < board.Length; i++)
+            {
+                for(int j =0;j<board[0].Length; j++)
+                {
+                    if (board[i][j] == word[0])
+                        startIndexes.Add(new Point(i, j));
+                }
+            }
+
+            bool[,] visited = new bool[board.Length,board[0].Length];
+
+            bool textFound = false;
+            foreach (var point in startIndexes)
+            {
+                textFound = Func(board, word, point.i,point.j,0);
+                if (textFound)
+                {
+                    break;
+                }
+            }
+            return textFound;
+        }
+
+        public static bool Func(char[][] board, string word, int row, int column,int wordInd)
+        {
+            if (row>board.Length-1 || column>board[0].Length-1 || row<0||column<0|| wordInd > word.Length - 1|| board[row][column]=='*')
+            {
+                return false;
+            }
+            
+            if (board[row][column] == word[wordInd])
+            {
+                if(wordInd == word.Length - 1)
+                {
+                    return true;
+                }
+                else
+                {
+                    board[row][column] = '*';
+                    var res = Func(board, word, row + 1, column, wordInd + 1) || Func(board, word, row, column + 1, wordInd + 1) || Func(board, word, row - 1, column, wordInd + 1) || Func(board, word, row, column - 1, wordInd + 1);
+                    board[row][column] = word[wordInd];
+                    return res;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /*Maximum Product Subarray
+         * Given an integer array nums, find a contiguous non-empty subarray within the array that has the largest product,
+         * and return the product.
+
+It is guaranteed that the answer will fit in a 32-bit integer.
+
+A subarray is a contiguous subsequence of the array.
+
+ 
+
+Example 1:
+
+Input: nums = [2,3,-2,4]
+Output: 6
+Explanation: [2,3] has the largest product 6.
+         */
+        public static void MaxProduct()
+        {
+            int[] nums = new int[] { 2, 3, -2, 4 };
+            var result = nums.Max();
+            int currMax = 1;
+            int currMin = 1;
+            foreach(var num in nums)
+            {
+                var temp = currMax;
+                currMax = Math.Max(num, Math.Max(currMax * num, currMin * num));
+                currMin = Math.Min(num, Math.Min(temp * num, currMin * num));
+                result = Math.Max(result, currMax);
+            }
+            Console.WriteLine(result);
+        }
+    }
+
+    public struct Point
+    {
+        public int i;
+        public int j;
+        public Point(int x, int y)
+        {
+            i = x;
+            j = y;
+        }
     }
 
     public class LRUCache
@@ -861,7 +969,7 @@ Output: [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]02*/
             var nextNode = node.next;
             var prevNode = node.prev;
             nextNode.prev = prevNode;
-            prevNode.next   = nextNode;
+            prevNode.next = nextNode;
         }
 
     }

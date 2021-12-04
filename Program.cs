@@ -92,6 +92,8 @@ namespace ConsoleApp4
             //Console.WriteLine(SearchingAndSorting.FindPeakElement(new int[] { 1, 2, 1, 3, 5, 6, 4 }));
 
             //maxProfit();
+
+            #region Leetcode medium
             //Leetcode_Medium.LengthOfLongestSubstring("abcabcbb");
             //Leetcode_Medium.ThreeSum(new int[] { -1, 0, 1, 2, -1, -4 });
             //Leetcode_Medium.ThreeSum(new int[] { 0,0,0,0});
@@ -153,16 +155,32 @@ namespace ConsoleApp4
             //lruProblem.Put(4,16);
             //Console.WriteLine(lruProblem.Get(1));
 
+            #region find Word in matrix
+            //            var board = new char[][]
+            //{
+            //new char[] { 'A','B','C','E'},
+            //new char[] { 'S','F','C','S' },
+            //new char[] { 'A', 'D', 'E', 'E' }
+            //};
+
+            //            //Console.WriteLine(Leetcode_Medium.Exist(board, "ABCCED"));
+            //            //Console.WriteLine(Leetcode_Medium.Exist(board, "SEE"));
+            //            Console.WriteLine(Leetcode_Medium.Exist(board, "ABCB"));
+            #endregion
+            Leetcode_Medium.MaxProduct();
+
+            #endregion
+
             #region leetcode easy
             Leetcode_Easy leetCodeEasy = new Leetcode_Easy();
             //Console.WriteLine(leetCodeEasy.IsPalindrome(345545));
 
-            Console.WriteLine(leetCodeEasy.IsValid("[[[]"));
-            Console.WriteLine(leetCodeEasy.IsValid("(){}"));
-            Console.WriteLine(leetCodeEasy.IsValid("([)]"));
-            Console.WriteLine(leetCodeEasy.IsValid("(]"));
-            Console.WriteLine(leetCodeEasy.IsValid("()[]{}"));
-            Console.WriteLine(leetCodeEasy.IsValid("()"));
+            //Console.WriteLine(leetCodeEasy.IsValid("[[[]"));
+            //Console.WriteLine(leetCodeEasy.IsValid("(){}"));
+            //Console.WriteLine(leetCodeEasy.IsValid("([)]"));
+            //Console.WriteLine(leetCodeEasy.IsValid("(]"));
+            //Console.WriteLine(leetCodeEasy.IsValid("()[]{}"));
+            //Console.WriteLine(leetCodeEasy.IsValid("()"));
 
             #endregion
             #region Dynamic Programming
