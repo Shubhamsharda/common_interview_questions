@@ -154,6 +154,7 @@ namespace ConsoleApp4
             //lruProblem.Put(3,9);
             //lruProblem.Put(4,16);
             //Console.WriteLine(lruProblem.Get(1));
+            //Console.WriteLine(Leetcode_Medium.Multiply("123", "456"));
 
             #region find Word in matrix
             //            var board = new char[][]
@@ -167,7 +168,7 @@ namespace ConsoleApp4
             //            //Console.WriteLine(Leetcode_Medium.Exist(board, "SEE"));
             //            Console.WriteLine(Leetcode_Medium.Exist(board, "ABCB"));
             #endregion
-            Leetcode_Medium.MaxProduct();
+            //Leetcode_Medium.MaxProduct();
 
             #endregion
 
@@ -189,8 +190,13 @@ namespace ConsoleApp4
             #endregion
 
             #region LinkedLists
-            //LinkedLists lnkdlst = new LinkedLists();
+            LinkedLists lnkdlst = new LinkedLists();
             //lnkdlst.Client();
+            ListNode head = new ListNode(1);
+            head.next = new ListNode(2);
+            head.next.next = new ListNode(3);
+            head.next.next.next = new ListNode(4);
+            lnkdlst.SwapPairsIterative(head);
             #endregion
 
             #region Trees

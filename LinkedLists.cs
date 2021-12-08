@@ -203,7 +203,74 @@ Output: [1]*/
 
 
         }
+        /*
+         Swap Nodes in Pairs
+         Given a linked list, swap every two adjacent nodes and return its head. You must solve the problem without modifying the values in the list's nodes (i.e., only nodes themselves may be changed.)
 
+         Example 1:
+         Input: head = [1,2,3,4]
+         Output: [2,1,4,3]
+         */
+        public ListNode SwapPairsRecursive(ListNode head)
+        { 
+            if (head == null || head.next==null)
+            {
+                return head;
+            }
+            else
+            {
+                ListNode first = head;
+                ListNode second = head.next;
 
+                if (second != null)
+                {
+                    ListNode temp = second.next;
+                    second.next = first;
+                    first.next = SwapPairsRecursive(temp);
+                }
+                return second;
+            }
+        }
+
+        public ListNode SwapPairsIterative(ListNode head)
+        {
+            // If linked list is empty or there
+            // is only one node in list
+            if (head == null || head.next == null)
+            {
+                return head;
+            }
+                   
+            // Initialize previous and current pointers
+            ListNode prev = head;
+            ListNode curr = head.next;
+
+            // Change head before proceeeding
+            head = curr;
+
+            // Traverse the list
+            while (true)
+            {
+                ListNode next = curr.next;
+
+                // Change next of current as previous node
+                curr.next = prev;
+
+                // If next NULL or next is the last node
+                if (next == null || next.next == null)
+                {
+                    prev.next = next;
+                    break;
+                }
+
+                // Change next of previous to next of next
+                prev.next = next.next;
+
+                // Update previous and curr
+                prev = next;
+                curr = prev.next;
+            }
+            return head;
+        }
     }
 }

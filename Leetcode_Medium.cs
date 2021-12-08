@@ -889,6 +889,49 @@ Explanation: [2,3] has the largest product 6.
             }
             Console.WriteLine(result);
         }
+        /*Multiply Strings
+         Given two non-negative integers num1 and num2 represented as strings, return the product of num1 and num2, also represented as a string.
+        Note: You must not use any built-in BigInteger library or convert the inputs to integer directly.
+        Example 1:
+        
+        Input: num1 = "2", num2 = "3"
+        Output: "6"
+        Example 2:
+        
+        Input: num1 = "123", num2 = "456"
+        Output: "56088"
+         */
+        public static string Multiply(string num1, string num2)
+        {
+            if (num1 == "0" || num2 == "0") return "0";
+            var res = new int[num1.Length + num2.Length];
+            num1 = new String(num1.Reverse().ToArray());
+            num2 = new String(num2.Reverse().ToArray());
+            for(int i = 0; i < num1.Length; i++)
+            {
+                for(int j = 0; j < num2.Length; j++)
+                {
+                    int a = Convert.ToInt32(num1[i].ToString());                                           
+                    int b = Convert.ToInt32(num2[j].ToString());
+                    int digit = a * b;
+                    res[i + j] += digit;
+                    res[i + j + 1] += res[i + j] / 10;
+                    res[i + j] = res[i + j] % 10;
+                }
+            }
+            var res2 = res.Reverse();
+            var ret = res2.Aggregate("", (acc, x) => acc + x.ToString());
+            int startPoint = 0;
+            for(int i = 0; i < ret.Length; i++)
+            {
+                if (ret[i] != '0')
+                {
+                    startPoint = i;
+                    break;
+                }
+            }
+            return ret.Substring(startPoint);
+        }
     }
 
     public struct Point
