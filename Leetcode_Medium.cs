@@ -932,6 +932,163 @@ Explanation: [2,3] has the largest product 6.
             }
             return ret.Substring(startPoint);
         }
+        /*Combination Sum
+         Given an array of distinct integers candidates and a target integer target, return a list of all unique combinations of candidates where the chosen numbers sum to target. You may return the combinations in any order.
+
+The same number may be chosen from candidates an unlimited number of times. Two combinations are unique if the frequency of at least one of the chosen numbers is different.
+
+It is guaranteed that the number of unique combinations that sum up to target is less than 150 combinations for the given input.
+
+ 
+
+Example 1:
+
+Input: candidates = [2,3,6,7], target = 7
+Output: [[2,2,3],[7]]
+Explanation:
+2 and 3 are candidates, and 2 + 2 + 3 = 7. Note that 2 can be used multiple times.
+7 is a candidate, and 7 = 7.
+These are the only two combinations.
+Example 2:
+
+Input: candidates = [2,3,5], target = 8
+Output: [[2,2,2,2],[2,3,3],[3,5]]
+         
+         
+         */
+        public static IList<IList<int>>  CombinationSum(int[] candidates, int target)
+        {
+            IList<IList<int>> list = new List<IList<int>>();
+            Array.Sort(candidates);
+            CombinationSumBacktrack(list, new List<int>(), candidates, target, 0);
+            return list;
+        }
+
+        private static void CombinationSumBacktrack(IList<IList<int>> list, List<int> tempList, int[] nums, int remain, int start)
+        {
+            if (remain < 0) return;
+            else if (remain == 0) list.Add(new List<int>(tempList));
+            else
+            {
+                for(int i = start; i < nums.Length; i++)
+                {
+                    tempList.Add(nums[i]);
+                    CombinationSumBacktrack(list,tempList,nums,remain - nums[i],i);
+                    tempList.RemoveAt(tempList.Count - 1);
+                }
+            }
+        }
+
+        public static IList<IList<int>> CombinationSum2(int[] candidates, int target)
+        {
+            Array.Sort(candidates);
+            IList<IList<int>> list = new List<IList<int>>();
+            CombinationSum2Backtracking(list, new List<int>(),candidates, target, 0);
+            return list;
+        }
+
+        private static void CombinationSum2Backtracking(IList<IList<int>> list, List<int> tempList,int[] candidates,int remainig,int start)
+        {
+            if (remainig < 0) return;
+            else if(remainig == 0) list.Add(new List<int>(tempList));
+            else
+            {
+                for(int i = start; i < candidates.Length; i++)
+                {
+                    if(i>start && candidates[i] == candidates[i - 1])
+                    {
+                        continue;
+                    }
+                    tempList.Add(candidates[i]);
+                    CombinationSum2Backtracking(list, tempList, candidates, remainig - candidates[i], i + 1);
+                    tempList.RemoveAt(tempList.Count - 1);
+                }
+            }
+        }
+
+        /*
+         Permutations
+         Given an array nums of distinct integers, return all the possible permutations. You can return the answer in any order.
+
+ 
+
+Example 1:
+
+Input: nums = [1,2,3]
+Output: [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
+Example 2:
+
+Input: nums = [0,1]
+Output: [[0,1],[1,0]]
+         */
+        public static IList<IList<int>> Permute(int[] nums)
+        {
+            IList<IList<int>> list = new List<IList<int>>();
+            PermuteBacktracking(list, new List<int>(), nums);
+            return list;
+        }
+
+        private static void PermuteBacktracking(IList<IList<int>> list, List<int> tempList,int[] nums)
+        {
+            if(tempList.Count == nums.Length)
+            {
+                list.Add(new List<int>(tempList));
+            }
+            else
+            {
+                for(int i = 0; i < nums.Length; i++)
+                {
+                    if (tempList.Contains(nums[i])) continue;
+                    tempList.Add(nums[i]);
+                    PermuteBacktracking(list, tempList, nums);
+                    tempList.RemoveAt(tempList.Count - 1);
+                }
+            }
+        }
+
+        /*
+         Permutations II
+        Given a collection of numbers, nums, that might contain duplicates, return all possible unique permutations in any order.
+
+ 
+
+Example 1:
+
+Input: nums = [1,1,2]
+Output:
+[[1,1,2],
+ [1,2,1],
+ [2,1,1]]
+Example 2:
+
+Input: nums = [1,2,3]
+Output: [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
+         */
+        public static IList<IList<int>> PermuteUnique(int[] nums)
+        {
+            IList<IList<int>> list = new List<IList<int>>();
+            Array.Sort(nums);
+            var used = new bool[nums.Length];
+            PermuteUniqueBacktrack(list,nums,used,new List<int>());
+            return list;
+        }
+
+        private static void PermuteUniqueBacktrack(IList<IList<int>> list, int[] nums,bool[] used,List<int> tempList)
+        {
+            if (tempList.Count == nums.Length) list.Add(new List<int>(tempList));
+            else
+            {
+                for(int i = 0; i < nums.Length; i++)
+                {
+                    if (used[i] || i > 0 && nums[i] == nums[i - 1] && !used[i - 1]) continue;
+                    tempList.Add(nums[i]);
+                    used[i] = true;
+                    PermuteUniqueBacktrack(list, nums, used, tempList);
+                    used[i] = false;
+                    tempList.RemoveAt(tempList.Count - 1);
+                }
+            }
+        }
     }
 
     public struct Point

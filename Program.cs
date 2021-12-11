@@ -155,6 +155,7 @@ namespace ConsoleApp4
             //lruProblem.Put(4,16);
             //Console.WriteLine(lruProblem.Get(1));
             //Console.WriteLine(Leetcode_Medium.Multiply("123", "456"));
+            Console.WriteLine(Leetcode_Medium.CombinationSum(new int[] { 2, 3, 5 }, 8));
 
             #region find Word in matrix
             //            var board = new char[][]
