@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace ConsoleApp4
 {
@@ -263,6 +264,211 @@ namespace ConsoleApp4
                 }
             }
             return result;
+        }
+
+        public bool IsValidBST(TreeNode root)
+        {
+            return IsValidBST(root, Int64.MinValue, Int64.MaxValue);
+        }
+        public bool IsValidBST(TreeNode root,Int64 min,Int64 max)
+        {
+            if (root == null) return true;
+            if (root.val >= max || root.val <= min) return false;
+            return IsValidBST(root.left, min, root.val) && IsValidBST(root.right, root.val, max);
+        }
+
+        public bool isValidBSTIterative(TreeNode root)
+        {
+            if (root == null) return false;
+            Stack<TreeNode> stack = new Stack<TreeNode>();
+            TreeNode pre = null;
+            while(root!=null || stack.Count > 0)
+            {
+                while (root != null)
+                {
+                    stack.Push(root);
+                    root = root.left;
+                }
+                root = stack.Pop();
+                if (pre != null && root.val <= pre.val) return false;
+                pre = root;
+                root = root.right;
+            }
+            return true;
+        }
+
+        /*
+         Flatten Binary Tree to Linked List
+Given the root of a binary tree, flatten the tree into a "linked list":
+
+The "linked list" should use the same TreeNode class where the right child pointer points to the next node in the list and the left child pointer is always null.
+The "linked list" should be in the same order as a pre-order traversal of the binary tree.
+         
+         */
+        public void Flatten(TreeNode root)
+        {
+            if(root == null)
+            {
+                return;
+            }
+            var stack = new Stack<TreeNode>();
+            stack.Push(root);
+            while (stack.Count > 0)
+            {
+                var curr = stack.Pop();
+                if (curr.right != null)
+                {
+                    stack.Push(curr.right);
+                }
+                if(curr.left != null)
+                {
+                    stack.Push(curr.left);
+                }
+                if (stack.Count > 0)
+                {
+                    curr.right = stack.Peek();
+                }
+                curr.left = null;
+            }
+        }
+
+        public void FlattenRecursive(TreeNode root)
+        {
+            dfs(root);
+        }
+
+        public TreeNode dfs(TreeNode root)
+        {
+            if (root == null)
+            {
+                return root;
+            }
+            var leftTail = dfs(root.left);
+            var rightTail = dfs(root.right);
+
+            if (root.left != null)
+            {
+                leftTail.right = root.right;
+                root.right = root.left;
+                root.left = null;
+            }
+            return rightTail ?? leftTail ?? root;
+
+        }
+        /*
+         Symmetric Tree
+        Given the root of a binary tree, check whether it is a mirror of itself (i.e., symmetric around its center).
+Example 1:
+Input: root = [1,2,2,3,4,4,3]
+Output: true
+         */
+        public bool IsSymmetricRecursive(TreeNode root)
+        {
+            return dfs(root.left,root.right);
+        }
+        private bool dfs(TreeNode root1,TreeNode root2)
+        {
+            if (root1 == null && root2 == null) return true;
+            if (root1 == null && root2 != null) return false;
+            if (root1 != null && root2 == null) return false;
+            return root1.val == root2.val && dfs(root1.left, root2.right) && dfs(root1.right, root2.left);
+        }
+        public bool IsSymmetricIterative(TreeNode root)
+        {
+            var que = new Queue<TreeNode>();
+            que.Enqueue(root.left);
+            var leftLevelOrder = new List<int>();
+            if(root.left!=null && root.right != null)
+            {
+                if(root.left.val != root.right.val)
+                {
+                    return false;
+                }
+            }
+            if(root.left == null  && root.right == null){
+                return true;
+            }
+
+            while (que.Count > 0)
+            {
+                var curr = que.Dequeue();
+                if (curr == null)
+                {
+                     
+                    continue;
+                }
+                if (curr.right != null)
+                {
+                    leftLevelOrder.Add(curr.right.val);
+                    que.Enqueue(curr.right);
+                }
+                else
+                {
+                    leftLevelOrder.Add(200);
+                }
+                if (curr.left != null)
+                {
+                    leftLevelOrder.Add(curr.left.val);
+                    que.Enqueue(curr.left);
+                }
+                else
+                {
+                    leftLevelOrder.Add(200);
+                }
+            }
+            var rightLevelOrder = new List<int>();
+            que = new Queue<TreeNode>();
+            que.Enqueue(root.right);
+            while (que.Count > 0)
+            {
+                var curr = que.Dequeue();
+                if (curr == null)
+                {
+
+                    continue;
+                }
+                if (curr.left != null)
+                {
+                    rightLevelOrder.Add(curr.left.val);
+                    que.Enqueue(curr.left);
+                }
+                else
+                {
+                    rightLevelOrder.Add(200);
+                }
+                if (curr.right != null)
+                {
+                    rightLevelOrder.Add(curr.right.val);
+                    que.Enqueue(curr.right);
+                }
+                else
+                {
+                    rightLevelOrder.Add(200);
+                }
+                
+            }
+            leftLevelOrder.ForEach(x => Console.WriteLine(x));
+            Console.WriteLine("-----------------");
+            rightLevelOrder.ForEach(x => Console.WriteLine(x));
+            bool result = true;
+            if (leftLevelOrder.Count != rightLevelOrder.Count)
+            {
+                return false;
+            }
+            else
+            {
+                int k = 0;
+                while (k <= leftLevelOrder.Count - 1)
+                {
+                    if(leftLevelOrder[k] != rightLevelOrder[k])
+                    {
+                        return false;
+                    }
+                    k++;
+                }
+            }
+                
+            return true;
         }
 
     }

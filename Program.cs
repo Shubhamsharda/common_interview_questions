@@ -155,7 +155,7 @@ namespace ConsoleApp4
             //lruProblem.Put(4,16);
             //Console.WriteLine(lruProblem.Get(1));
             //Console.WriteLine(Leetcode_Medium.Multiply("123", "456"));
-            Console.WriteLine(Leetcode_Medium.CombinationSum(new int[] { 2, 3, 5 }, 8));
+            //Console.WriteLine(Leetcode_Medium.CombinationSum(new int[] { 2, 3, 5 }, 8));
 
             #region find Word in matrix
             //            var board = new char[][]
@@ -170,6 +170,16 @@ namespace ConsoleApp4
             //            Console.WriteLine(Leetcode_Medium.Exist(board, "ABCB"));
             #endregion
             //Leetcode_Medium.MaxProduct();
+            //var arr = new int[] { 3,2,1 };
+            //Leetcode_Medium.NextPermutation(arr);
+            //foreach(var num in arr)
+            //{
+            //    Console.WriteLine(num);
+            //}
+            var arrr = new int[] { 0, 1, 0, 3, 12 };
+            Leetcode_Medium.MoveZeroes(arrr);
+            printArray(arrr);
+
 
             #endregion
 
@@ -192,12 +202,12 @@ namespace ConsoleApp4
 
             #region LinkedLists
             LinkedLists lnkdlst = new LinkedLists();
-            //lnkdlst.Client();
-            ListNode head = new ListNode(1);
-            head.next = new ListNode(2);
-            head.next.next = new ListNode(3);
-            head.next.next.next = new ListNode(4);
-            lnkdlst.SwapPairsIterative(head);
+            ////lnkdlst.Client();
+            //ListNode head = new ListNode(1);
+            //head.next = new ListNode(2);
+            //head.next.next = new ListNode(3);
+            //head.next.next.next = new ListNode(4);
+            //lnkdlst.SwapPairsIterative(head);
             #endregion
 
             #region Trees
@@ -211,8 +221,8 @@ namespace ConsoleApp4
             //root.left.right = new TreeNode(4);
             //root.right = new TreeNode(2);
             //root.right.right = new TreeNode(7);
-           //--------------------merge binary tree-------------- 
-            
+            //--------------------merge binary tree-------------- 
+
             //var root2 = new TreeNode(2);
             //root2.left = new TreeNode(1);
             //root2.right = new TreeNode(3);
@@ -238,6 +248,26 @@ namespace ConsoleApp4
             //preOrderNary2.All(x => { Console.WriteLine(x); return true; });
 
             //Console.WriteLine(tree.kthSmallest(root,5));
+
+            //------------------validate binary search tree-------------
+            var root = new TreeNode(5);
+            root.left = new TreeNode(1);
+            root.right = new TreeNode(4);
+            root.right.left = new TreeNode(3);
+            root.right.right = new TreeNode(6);
+            //Console.WriteLine(tree.IsValidBST(root));
+            //Console.WriteLine(tree.isValidBSTIterative(root));
+            //tree.Flatten(root);
+            //tree.InOrderPrint(root);
+            //var root2 = new TreeNode(1);
+            //root2.left = new TreeNode(2);
+            //root2.left.left = new TreeNode(3);
+            //root2.left.right = new TreeNode(4);
+            //root2.right = new TreeNode(2);
+            //root2.right.left = new TreeNode(4);
+            //root2.right.right= new TreeNode(3);
+            //Console.WriteLine(tree.IsSymmetricIterative(root2));
+
 
 
             #endregion
@@ -899,6 +929,16 @@ namespace ConsoleApp4
                 }
             }
             return maxprofit;
+        }
+
+        public static void printArray(int[] arr)
+        {
+            Console.WriteLine("-------------------");
+            foreach(var ch in arr)
+            {
+                Console.WriteLine(ch);
+            }
+            Console.WriteLine("-------------------");
         }
     }
 

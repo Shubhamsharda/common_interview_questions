@@ -1064,7 +1064,7 @@ Example 2:
 Input: nums = [1,2,3]
 Output: [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
          */
-        public static IList<IList<int>> PermuteUnique(int[] nums)
+        public static IList<IList<int>> PermuteUnique2(int[] nums)
         {
             IList<IList<int>> list = new List<IList<int>>();
             Array.Sort(nums);
@@ -1088,6 +1088,309 @@ Output: [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
                     tempList.RemoveAt(tempList.Count - 1);
                 }
             }
+        }
+        public IList<string> LetterCombinations(string digits)
+        {
+            var dict = new Dictionary<char, List<string>>()
+            {
+            { '0', new List<string>() { " "} },
+            { '1', new List<string>() },
+            { '2', new List<string>() { "a", "b", "c" } },
+            { '3', new List<string>() { "d", "e", "f" } },
+            { '4', new List<string>() { "g", "h", "i" } },
+            { '5', new List<string>() { "j", "k", "l" } },
+            { '6', new List<string>() { "m", "n", "o" } },
+            { '7', new List<string>() { "p", "q", "r","s" } },
+            { '8', new List<string>() { "t", "u", "v" } },
+            { '9', new List<string>() { "w", "x", "y","z" } }
+            };
+            if (digits == "")
+            {
+                return new List<string>();
+            }
+            var result = new List<string>();
+            backtrack99(new List<char>(), digits, result, dict, 0);
+            return result;
+        }
+
+        public void backtrack99(List<char> tempStr, string digits, List<string> result, Dictionary<char, List<string>> dict, int digitIndex)
+        {
+            if (tempStr.Count == digits.Length)
+            {
+                result.Add(new string(tempStr.ToArray()));
+            }
+            else
+            {
+                List<string> chars = dict[digits[digitIndex]];
+                for (int i = 0; i < chars.Count; i++)
+                {
+                    tempStr.AddRange(chars[i].ToCharArray());
+                    backtrack99(tempStr, digits, result, dict, digitIndex + 1);
+                    tempStr.RemoveAt(tempStr.Count - 1);
+                }
+            }
+        }
+
+        /*Rotate Image
+         Input: matrix = [[1,2,3],[4,5,6],[7,8,9]]
+Output: [[7,4,1],[8,5,2],[9,6,3]]
+         */
+        public void Rotate(int[][] matrix)
+        {
+            swapcolumns(matrix);
+            swapSymmetry(matrix);
+        }
+
+        private void swapSymmetry(int[][] matrix)
+        {
+            for (int i = 0; i < matrix.Length; i++)
+            {
+                for (int j = i + 1; j < matrix[0].Length; j++)
+                {
+                    swap(i, j, j, i, matrix);
+                }
+            }
+        }
+
+        private void swap(int a, int b, int i, int j, int[][] matrix)
+        {
+            var temp = matrix[a][b];
+            matrix[a][b] = matrix[i][j];
+            matrix[i][j] = temp;
+        }
+
+        private void swapcolumns(int[][] matrix)
+        {
+            int lastRow = matrix.Length - 1;
+            int lastCol = matrix[0].Length - 1;
+
+            for (int j = 0; j <= lastCol; j++)
+            {
+                int start = 0;
+                int end = lastRow;
+                while (start < end)
+                {
+                    swap(start, j, end, j, matrix);
+                    start++;
+                    end--;
+                }
+            }
+        }
+
+        /* Minimum Path Sum
+         Given a m x n grid filled with non-negative numbers, find a path from top left to bottom right, which minimizes the sum of all numbers along its path.
+
+Note: You can only move either down or right at any point in time.
+        Input: grid = [[1,3,1],[1,5,1],[4,2,1]]
+Output: 7
+Explanation: Because the path 1 → 3 → 1 → 1 → 1 minimizes the sum.
+         */
+        public int MinPathSum(int[][] grid)
+        {
+            Dictionary<(int, int), int> dict = new Dictionary<(int, int), int>();
+            return MinPathSum(grid, 0, 0, dict);
+        }
+        public int MinPathSum(int[][] grid, int i, int j, Dictionary<(int, int), int> dict)
+        {
+            int maxrow = grid.Length - 1;
+            int maxcol = grid[0].Length - 1;
+            if (i == grid.Length - 1 && j == grid[0].Length - 1)
+            {
+                return dict[(i, j)] = grid[i][j];
+            }
+            else if (i > maxrow || j > maxcol)
+            {
+                return Int32.MaxValue;
+            }
+            else if (dict.ContainsKey((i, j)))
+            {
+                return dict[(i, j)];
+            }
+            else
+            {
+                return dict[(i, j)] = grid[i][j] + Math.Min(MinPathSum(grid, i + 1, j, dict), MinPathSum(grid, i, j + 1, dict));
+            }
+        }
+
+        /*
+        Next Permutation
+       Implement next permutation, which rearranges numbers into the lexicographically next greater permutation of numbers.
+
+If such an arrangement is not possible, it must rearrange it as the lowest possible order (i.e., sorted in ascending order).
+
+The replacement must be in place and use only constant extra memory.
+       Example 1:
+
+Input: nums = [1,2,3]
+Output: [1,3,2]
+Example 2:
+
+Input: nums = [3,2,1]
+Output: [1,2,3]
+        */
+
+
+
+        public static void NextPermutation(int[] nums)
+        {
+            int i = nums.Length-2;
+            while (i >= 0 && nums[i] >= nums[i+1]) i--;
+            if (i >= 0)
+            {
+                int j = nums.Length - 1;
+                while (nums[j] <= nums[i]) j--;
+                swap(i, j, nums);
+            }
+            reverse(i + 1, nums.Length - 1, nums);
+        }
+
+        private static void reverse(int start, int end, int[] nums)
+        {
+            while (start < end)
+            {
+                var temp = nums[start];
+                nums[start] = nums[end];
+                nums[end] = temp;
+                start++;
+                end--;
+            }
+        }
+
+        private static void swap(int i, int j, int[] nums)
+        {
+            var temp = nums[i];
+            nums[i] = nums[j];
+            nums[j] = temp;
+        }
+
+        /*Subsets
+         Given an integer array nums of unique elements, return all possible subsets (the power set).
+
+The solution set must not contain duplicate subsets. Return the solution in any order.
+Example 1:
+Input: nums = [1,2,3]
+Output: [[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]
+         */
+        public IList<IList<int>> Subsets(int[] nums)
+        {
+            Array.Sort(nums);
+            var list = new List<int>();
+            var result = new List<IList<int>>();
+            backtrack55(nums, 0, list, result);
+            return result;
+        }
+        private void backtrack55(int[] nums,int start,List<int> list, List<IList<int>> result)
+        {
+            result.Add(new List<int>(list));
+            for(int i = start; i < nums.Length; i++)
+            {
+                list.Add(nums[i]);
+                backtrack55(nums, i + 1, list, result);
+                list.RemoveAt(list.Count - 1);
+            }
+        }
+
+        /*
+         Longest Consecutive Sequence
+        Given an unsorted array of integers nums, return the length of the longest consecutive elements sequence.
+You must write an algorithm that runs in O(n) time.
+
+Example 1:
+
+Input: nums = [100,4,200,1,3,2]
+Output: 4
+Explanation: The longest consecutive elements sequence is [1, 2, 3, 4]. Therefore its length is 4.
+Example 2:
+
+Input: nums = [0,3,7,2,5,8,4,6,0,1]
+Output: 9
+         */
+        public int LongestConsecutive(int[] nums)
+        {
+            if (nums.Length == 0) return 0;
+            var set = new HashSet<int>(nums);
+            int maxLength = 1;
+            foreach(var ele in nums)
+            {
+                if (set.Contains(ele - 1))
+                {
+                    continue;
+                }
+                var curr = ele+1;
+                int count = 1;
+                while (set.Contains(curr))
+                {
+                    count++;
+                    curr++;
+                }
+                if (count > maxLength) maxLength = count;
+            }
+            return maxLength;
+
+        }
+
+        /*# Boyer's Moore Algorithm --> O(1) Space
+        
+        # We first assume that our first num is the majority element
+        # So the count here is 1 as we have seen it 1 times, if the 
+        # count in the end is greater than 0 we are sure that this is majority element
+        # as if you take count of majority element and subtract sum of all counts of non
+        # Majority element, if that count is still positive that it proves that is
+        # majority element. We do not need to check count in end over here as we are 
+        # sure that there exists a majority element.*/
+
+        public int MajorityElement(int[] nums)
+        {
+            var count = 1;
+            //Our Initial guess that this is the majority element
+            var result = nums[0];
+            for(int i=1;i<nums.Length;i++)
+            {
+                /*# If the next number is not same as prev
+            # and count becomes 0 make this number as majority element and initialize 
+            # count to 1 again else just decrease the count*/
+                if (nums[i] != result)
+                {
+                    //# decrease count by 1
+                    count--;
+                    //Make this element as majority element
+                    if (count == 0)
+                    {
+                        result = nums[i];
+                        count = 1;
+                    }
+                }
+                else
+                {
+                    //This is same element as previous one.
+                    count++;
+                }
+            }
+            return result;
+        }
+
+        public static void MoveZeroes(int[] nums)
+        {
+            int snowBallSize = 0;
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (nums[i] == 0)
+                {
+                    snowBallSize++;
+                }
+                else if (snowBallSize > 0)
+                {
+                    int t = nums[i];
+                    nums[i] = 0;
+                    nums[i - snowBallSize] = t;
+                }
+            }
+        }
+        private static void Swap(int i, int j, int[] nums)
+        {
+            var temp = nums[i];
+            nums[i] = nums[j];
+            nums[j] = temp;
         }
     }
 
@@ -1181,6 +1484,49 @@ Output: [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
 
         public LLNode next { get; set; }
         public LLNode prev { get; set; }
+    }
+
+    class MinStack
+    {
+        private Node22 head;
+
+        public void push(int x)
+        {
+            if (head == null)
+                head = new Node22(x, x, null);
+            else
+                head = new Node22(x, Math.Min(x, head.min), head);
+        }
+
+        public void pop()
+        {
+            head = head.next;
+        }
+
+        public int top()
+        {
+            return head.val;
+        }
+
+        public int getMin()
+        {
+            return head.min;
+        }
+
+        
+    }
+    public class Node22
+    {
+        public int val;
+        public int min;
+        public Node22 next;
+
+        public Node22(int val, int min, Node22 next)
+        {
+            this.val = val;
+            this.min = min;
+            this.next = next;
+        }
     }
 
 

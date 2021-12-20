@@ -272,5 +272,61 @@ Output: [1]*/
             }
             return head;
         }
+        public bool HasCycle(ListNode head)
+        {
+            if (head == null) return false;
+            ListNode walker=head;
+            ListNode runner=head;
+            while(walker.next!=null && runner.next!=null &&  runner.next.next != null)
+            {
+                walker = walker.next;
+                runner = runner.next.next;
+                if (walker == runner) return true;
+            }
+            return false;
+        }
+
+        /*Linked List Cycle II
+         Given the head of a linked list, return the node where the cycle begins. If there is no cycle, return null.
+
+There is a cycle in a linked list if there is some node in the list that can be reached again by continuously following the next pointer. Internally, pos is used to denote the index of the node that tail's next pointer is connected to (0-indexed). It is -1 if there is no cycle. Note that pos is not passed as a parameter.
+
+Do not modify the linked list.
+         
+         */
+        public ListNode DetectCycle(ListNode head)
+        {
+            if (head == null|| head.next == null) return null;
+            ListNode walker = head;
+            ListNode runner = head;
+            ListNode entry = head ;
+            bool iscycle = false;
+            while (walker.next != null && runner.next != null && runner.next.next != null)
+            {
+                walker = walker.next;
+                runner = runner.next.next;
+                if (walker == runner)
+                {
+                    iscycle = true;
+                    break;
+                }
+            }
+            if (iscycle)
+            {
+                while (entry != null && walker != null)
+                {
+                    if (entry == walker) break;
+                    entry = entry.next;
+                    walker = walker.next;
+                }
+                return entry;
+            }
+            else
+            {
+                return null;
+            }   
+        }
+
+
     }
 }
