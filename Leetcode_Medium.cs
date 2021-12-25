@@ -1392,6 +1392,41 @@ Output: 9
             nums[i] = nums[j];
             nums[j] = temp;
         }
+
+        public static int CanCompleteCircuit(int[] gas, int[] cost)
+        {
+            int ret = -1;
+            for (int i = 0; i < gas.Length - 1; i++)
+            {
+                int currgas = gas[i];
+                bool solutionFound = false;
+                bool[] visited = new bool[gas.Length];
+                Console.WriteLine($" i = {i}");
+                for (int j = i ; ; j = (j + 1) % gas.Length)
+                {
+                    Console.WriteLine($" j = {j}");
+                    Console.WriteLine($" currGas  = {currgas}");
+
+
+                    if (visited[j])
+                    {
+                        if (currgas >= 0)
+                        {
+                            solutionFound = true;
+                            ret = i;
+                        }
+                        break;
+                    }
+                    visited[j] = true;
+                    currgas = currgas - cost[j];
+                    if (currgas < 0) break;
+                    currgas = currgas + gas[(j + 1) % gas.Length];
+                }
+                if (solutionFound) break;
+                
+            }
+            return ret;
+        }
     }
 
     public struct Point

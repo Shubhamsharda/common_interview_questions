@@ -176,9 +176,14 @@ namespace ConsoleApp4
             //{
             //    Console.WriteLine(num);
             //}
-            var arrr = new int[] { 0, 1, 0, 3, 12 };
-            Leetcode_Medium.MoveZeroes(arrr);
-            printArray(arrr);
+            //var arrr = new int[] { 0, 1, 0, 3, 12 };
+            //Leetcode_Medium.MoveZeroes(arrr);
+            //printArray(arrr);
+            //---------------------
+            var gas = new int[] {1,2,3,4,5  };
+            var cost = new int[] {3,4,5,1,2 };
+            Console.WriteLine(Leetcode_Medium.CanCompleteCircuit(gas, cost));
+            //----------------------
 
 
             #endregion
