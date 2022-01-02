@@ -1406,8 +1406,6 @@ Output: 9
                 {
                     Console.WriteLine($" j = {j}");
                     Console.WriteLine($" currGas  = {currgas}");
-
-
                     if (visited[j])
                     {
                         if (currgas >= 0)
@@ -1422,10 +1420,64 @@ Output: 9
                     if (currgas < 0) break;
                     currgas = currgas + gas[(j + 1) % gas.Length];
                 }
-                if (solutionFound) break;
-                
+                if (solutionFound) break;   
             }
             return ret;
+        }
+
+        public static int CanCompleteCircuit2(int[] gas, int[] cost)
+        {
+            if (gas.Sum() < cost.Sum()) return -1;
+            int total = 0;
+            int start = 0;
+            for(int i = 0; i < gas.Length; i++)
+            {
+                total += (gas[i] - cost[i]);
+                if (total < 0)
+                {
+                    total = 0;
+                    start = i + 1;
+                }
+            }
+            return start;
+        }
+
+        public static bool CanFinish(int numCourses, int[][] prerequisites)
+        {
+            var preMap = new Dictionary<int, List<int>>();
+            for(int i = 0; i < numCourses; i++)
+            {
+                preMap[i] = new List<int>();
+            }
+            foreach(var courseAndPrerequisite in prerequisites)
+            {
+                preMap[courseAndPrerequisite[0]].Add(courseAndPrerequisite[1]);
+            }
+            var visitSet = new List<int>();
+            bool dfs(int course)
+            {
+                if (visitSet.Contains(course))
+                {
+                    return false;
+                }
+                if (preMap[course].Count == 0)
+                {
+                    return true;
+                }
+                visitSet.Add(course);
+                foreach(var pre in preMap[course])
+                { 
+                    if(!dfs(pre)) return false;
+                }
+                visitSet.Remove(course);
+                preMap[course] = new List<int>();
+                return true;
+            }
+            for (int i = 0; i < numCourses; i++)
+            {
+                if(!dfs(i)) return false;
+            }
+            return true;
         }
     }
 

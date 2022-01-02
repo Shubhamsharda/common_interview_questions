@@ -156,6 +156,7 @@ namespace ConsoleApp4
             //Console.WriteLine(lruProblem.Get(1));
             //Console.WriteLine(Leetcode_Medium.Multiply("123", "456"));
             //Console.WriteLine(Leetcode_Medium.CombinationSum(new int[] { 2, 3, 5 }, 8));
+            Console.WriteLine(Leetcode_Medium.CanFinish(2,new int[][] { new int[] { 1, 0 } }));
 
             #region find Word in matrix
             //            var board = new char[][]
@@ -179,10 +180,10 @@ namespace ConsoleApp4
             //var arrr = new int[] { 0, 1, 0, 3, 12 };
             //Leetcode_Medium.MoveZeroes(arrr);
             //printArray(arrr);
-            //---------------------
-            var gas = new int[] {1,2,3,4,5  };
-            var cost = new int[] {3,4,5,1,2 };
-            Console.WriteLine(Leetcode_Medium.CanCompleteCircuit(gas, cost));
+            ////---------------------
+            //var gas = new int[] {5, 1, 2, 3, 4 };
+            //var cost = new int[] {4, 4, 1, 5, 1};
+            //Console.WriteLine(Leetcode_Medium.CanCompleteCircuit(gas, cost));
             //----------------------
 
 
