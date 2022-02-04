@@ -1456,6 +1456,7 @@ Output: 9
             var visitSet = new List<int>();
             bool dfs(int course)
             {
+                
                 if (visitSet.Contains(course))
                 {
                     return false;
@@ -1478,6 +1479,124 @@ Output: 9
                 if(!dfs(i)) return false;
             }
             return true;
+        }
+        /*
+         Word Break
+Given a string s and a dictionary of strings wordDict, return true if s can be segmented into a space-separated sequence of one or more dictionary words.
+
+Note that the same word in the dictionary may be reused multiple times in the segmentation.
+
+ 
+
+Example 1:
+
+Input: s = "leetcode", wordDict = ["leet","code"]
+Output: true
+Explanation: Return true because "leetcode" can be segmented as "leet code".
+Example 2:
+
+Input: s = "applepenapple", wordDict = ["apple","pen"]
+Output: true
+Explanation: Return true because "applepenapple" can be segmented as "apple pen apple".
+Note that you are allowed to reuse a dictionary word.
+         
+         */
+        public static bool WordBreak2(string s, IList<string> wordDict)
+        {
+            bool[] dp = new bool[s.Length + 1];
+            dp[s.Length] = true;
+            for (int i = s.Length - 1; i >= 0; i--)
+            {
+                foreach (var w in wordDict)
+                {
+                    if ((i + w.Length) <= s.Length && s.Substring(i, w.Length) == w)
+                    {
+                        dp[i] = dp[i + w.Length];
+                    }
+                    if (dp[i])
+                    {
+                        break;
+                    }
+                }
+            }
+            return dp[0];
+        }
+
+        public static bool WordBreak(string s, IList<string> wordDict)
+        {
+            int charIndex = 0;
+            List<int> findthepossiblestarts(int charIndex)
+            {
+
+                if(charIndex == 13)
+                {
+                    Console.WriteLine("asdas");
+                }
+                var lst = new List<int>();
+                if (charIndex >= s.Length) return lst;
+                for(int i = 0; i < wordDict.Count; i++)
+                {
+                    if(s[charIndex] == wordDict[i][0])
+                    {
+                        lst.Add(i);
+                    }
+                }
+                return lst;
+            }
+
+            bool moveThePointer(int charIndex,int possibleStart,out int newStart)
+            {
+                Console.WriteLine("moveThePointer" + charIndex);
+                newStart = charIndex;
+                int len = wordDict[possibleStart].Length;
+                int count = 0;
+                while (newStart < s.Length && count < wordDict[possibleStart].Length)
+                {
+                    if(s[newStart] == wordDict[possibleStart][count])
+                    {
+                        count++;
+                        newStart += 1;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                if (newStart == s.Length && count == len+1)
+                {
+                    return true;
+                }
+                if(len == count)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+            bool dfs(int charIndex,List<int> possibleStarts)
+            {
+                Console.WriteLine("dfs" + charIndex);
+                if (charIndex >= s.Length) return true;
+
+                foreach(var possiblestart in possibleStarts)
+                {
+                    int newStart = 0;
+                    var res = moveThePointer(charIndex, possiblestart, out newStart);
+                    if (res)
+                    {
+                        var a = findthepossiblestarts(newStart);
+                        var res1 = dfs(newStart, a);
+                        if (res1) return true;
+                    }
+                }
+                return false;
+            }
+
+            var b = findthepossiblestarts(0);
+            return dfs(0, b);
         }
     }
 
