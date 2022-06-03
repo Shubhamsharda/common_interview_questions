@@ -157,8 +157,10 @@ namespace ConsoleApp4
             //Console.WriteLine(Leetcode_Medium.Multiply("123", "456"));
             //Console.WriteLine(Leetcode_Medium.CombinationSum(new int[] { 2, 3, 5 }, 8));
             //Console.WriteLine(Leetcode_Medium.CanFinish(2,new int[][] { new int[] { 1, 0 } }));
-            Console.WriteLine(Leetcode_Medium.WordBreak2("applepenapple", new List<string>() { "apple", "pen" }));
+            //Console.WriteLine(Leetcode_Medium.WordBreak2("applepenapple", new List<string>() { "apple", "pen" }));
             //Console.WriteLine(Leetcode_Medium.WordBreak("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab",new List<string>() { "a","aa","aaa","aaaa","aaaaa","aaaaaa","aaaaaaa","aaaaaaaa","aaaaaaaaa","aaaaaaaaaa"}));
+            //Console.WriteLine(Leetcode_Medium.Calculate("3+2*2"));
+            Console.WriteLine(Leetcode_Medium.LowestCommonAncestor());
 
             #region find Word in matrix
             //            var board = new char[][]
@@ -187,6 +189,9 @@ namespace ConsoleApp4
             //var cost = new int[] {4, 4, 1, 5, 1};
             //Console.WriteLine(Leetcode_Medium.CanCompleteCircuit(gas, cost));
             //----------------------
+            //Leetcode_Medium.DivideIntegers();
+            //Leetcode_Medium.NumDecodings("226");
+            //Leetcode_Medium.SpiralOrder();
 
 
             #endregion
@@ -201,6 +206,7 @@ namespace ConsoleApp4
             //Console.WriteLine(leetCodeEasy.IsValid("(]"));
             //Console.WriteLine(leetCodeEasy.IsValid("()[]{}"));
             //Console.WriteLine(leetCodeEasy.IsValid("()"));
+            //leetCodeEasy.SearchInsert();
 
             #endregion
             #region Dynamic Programming
